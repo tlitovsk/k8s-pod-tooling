@@ -8,4 +8,5 @@ setup(name='k8s-pod-tooling',
       author_email='anatoly.lit@gmail.com',
       license='GPLv3',
       packages=['k8s-pod-tooling'],
-      zip_safe=False)
+      zip_safe=False,
+      install_requires=["dockerfile_parse"])
