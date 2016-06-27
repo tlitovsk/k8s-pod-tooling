@@ -1,2 +1,6 @@
 *.pyc
 Dockerfile*
+penv/*
+build/*
+dist/*
+*egg-info/*
