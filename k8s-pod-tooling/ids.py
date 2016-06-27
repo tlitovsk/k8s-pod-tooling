@@ -1,9 +1,9 @@
 _rhel = {"tags": {"FROM": "rhel", "RUN": "yum"},
-         "instrument": "yum install python-ipdb ltrace gdb vim -y"}
+         "instrument": "yum install python-ipdb ltrace gdb procps-ng -y"}
 _centos = {"tags": {"FROM": "centos", "RUN": "yum"}, "instrument":
-           "yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum install python-ipdb ltrace gdb vim -y"}
+           "yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum install python-ipdb ltrace gdb procps-ng-y"}
 _fedora = {"tags": {"FROM": "fedora", "RUN": "dnf"},
-           "instrument": "dnf install python-ipdb ltrace gdb vim coreutils -y"}
+           "instrument": "dnf install python-ipdb ltrace gdb coreutils procps-ng -y"}
 #_debian = { "FROM" : "debian" , "RUN" : "apt-get" }
 
 ids = [_rhel, _centos, _fedora ]

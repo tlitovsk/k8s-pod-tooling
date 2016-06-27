@@ -21,6 +21,7 @@ class DebugDockerfile:
 
         cmd = '\nCMD ' + original_cmd + ' & sleep infinity \n'
         retVal = dfp.lines
+        # TODO : install the cmd as first wge and not last
         retVal.append("\n" + self._install_command + "\n")
         retVal.append(cmd)
         return retVal
@@ -43,6 +44,25 @@ class DebugDockerfile:
         raise NotImplementedError('can identify the image src')
 
 
+_kcp_bash = '''
+#!/bin/bash -xe
+
+function help()
+{
+    echo "Usage:"
+    echo "ksp <pod name> <local file> <location in pod>"
+}
+
+if [ -z $1 ]
+then
+    help
+    exit 1
+fi
+
+cat $2 | kubectl exec -ti $1 -- /bin/bash -c "cat > $3//$2"
+'''
+
+
 def instrument(dockerfile):
     ''' Get a dict in dockerfile parser format
         https://github.com/DBuildService/dockerfile-parse/blob/master/dockerfile_parse/parser.py#L163
@@ -52,3 +72,6 @@ def instrument(dockerfile):
     #pprint( prc.getDebugDockerFile() )
     with open("{}.debug".format(dockerfile), 'w') as f:
         f.write("".join(prc.getDebugDockerFile()))
+
+    with open("kcp.sh", 'w') as f:
+        f.write(_kcp_bash)
